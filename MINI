@@ -1,0 +1,67 @@
+#                       MINOR-PROJECT ON MACHINE LEARNING
+
+
+import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+df = pd.read_csv(r"C:\Users\GOWTHAM REDDY\Desktop\DataCoSupplyChainDataset.csv", encoding = 'unicode_escape')
+df
+
+# DATA CLEANING
+
+df.info()
+
+df.shape
+
+df.head()
+
+df.columns
+
+# 1) List all the cities and the respective number of pending orders in 'India'?
+
+by_Country=df.groupby("Order_Country")
+
+by_Country.describe().transpose()['India']
+
+import numpy as np 
+import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+newdf=df[df["Order_Country"]=="India"]
+
+newdf[df["Order_Status"]=="PENDING"]
+
+# 2) Which country has the most suspected fraud?
+
+import matplotlib.pyplot as plt
+high_fraud = df[(df['Order_Status'] == 'SUSPECTED_FRAUD') & (df['Type'] == 'TRANSFER')]
+fraud=high_fraud['Order Region'].value_counts().plot.pie(figsize=(24,12),
+startangle=180, explode=(0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),autopct='%.1f',shadow=True,)
+plt.title("Regions with Highest Fraud",size=15,color='y')
+plt.ylabel(" ")
+fraud.axis('equal') 
+plt.show()
+
+# 3) Which product(s) has/have the maximum discount?
+
+g_most = df[df.Order_Item_Discount==df.Order_Item_Discount.max()]
+gleast=df[df.Order_Item_Discount!=0]
+g_most.Product_Name
+
+# 4) How many successfully processed orders have days for shipping real (Real) > Days for shipment (Scheduled)?
+
+r=df[df["Order_Status"]=="COMPLETE"]
+r
+
+r=df['Days for shipping (real)'] = df['Days for shipping (real)'].astype('str')
+
+r=df["Days for shipping (real)"]
+r
+
+r=df["Days for shipping (real)"]
+t=df["Days for shipment (scheduled)"]
+s=r>t
+s.value_counts()
+def count(s):
+    return sum(bool(x) for x in s)
+print(count(s))
